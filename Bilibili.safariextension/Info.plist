@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>BlueCocoa</string>
+	<key>Builder Version</key>
+	<string>9537.75.14</string>
+	<key>CFBundleDisplayName</key>
+	<string>Bilibili Safari</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.ra1ndrops.bilibili-safari</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Global Page</key>
+		<string>global.html</string>
+		<key>Menus</key>
+		<array>
+			<dict>
+				<key>Identifier</key>
+				<string>bilibiliMenu</string>
+				<key>Menu Items</key>
+				<array>
+					<dict>
+						<key>Identifier</key>
+						<string>HighQuality</string>
+						<key>Title</key>
+						<string>高清</string>
+					</dict>
+					<dict>
+						<key>Identifier</key>
+						<string>NormalQuality</string>
+						<key>Title</key>
+						<string>一般</string>
+					</dict>
+					<dict>
+						<key>Identifier</key>
+						<string>BlackTech</string>
+						<key>Title</key>
+						<string>黑科技</string>
+					</dict>
+				</array>
+			</dict>
+		</array>
+		<key>Toolbar Items</key>
+		<array>
+			<dict>
+				<key>Identifier</key>
+				<string>bilibiliTabs</string>
+				<key>Image</key>
+				<string>toolbar.png</string>
+				<key>Label</key>
+				<string>Bilibili Tabs</string>
+				<key>Menu</key>
+				<string>bilibiliMenu</string>
+			</dict>
+		</array>
+	</dict>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict/>
+	</dict>
+	<key>Description</key>
+	<string>An extension of bilibili.</string>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>All</string>
+		</dict>
+	</dict>
+	<key>Website</key>
+	<string>http://www.ra1ndrops.com</string>
+</dict>
+</plist>

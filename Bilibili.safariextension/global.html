@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<script>
+var activeTab;
+safari.application.addEventListener("validate", validateHandler, true);
+safari.application.addEventListener("activate", activateHandler, true);
+safari.application.addEventListener("command", commandHandler, true);
+safari.application.addEventListener("menu", menuHandler, true);
+
+function getAVID(source,start,end){
+    var oReg=new RegExp(start+".*?"+end,"img");
+    var oRegStart=new RegExp(start,"g");
+    var oRegEnd=new RegExp(end,"g");
+    var result = source.match(oReg);
+    if (result)return source.match(oReg).join("=").replace("/","").replace(oRegStart,"").replace(oRegEnd,"").split("=");
+    else return null;
+}
+
+function httpGet(theUrl)
+{
+    var xmlHttp = null;
+    
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false );
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+
+function getCID(avnumber){
+    var data = httpGet("http://www.ra1ndrops.com/getbilidouga.php?request=a2c&type=num&avid="+avnumber).split(',');
+    return data[0];
+}
+
+function activateHandler(event){
+    if (event.target instanceof SafariBrowserTab && event.target.url)activeTab = event.target;
+}
+
+function validateHandler(event)
+{
+    if (event.command !== "bilibiliTabs")return;
+    var toolbarItem = event.target;
+    if (activeTab){
+        var bili = getAVID(activeTab.url,"http://","kankannews.com");
+        if (bili == null){
+            bili = getAVID(activeTab.url,"http://","bilibili.tv");
+            if(bili == null){
+                toolbarItem.disabled = true;
+                return;
+            }
+        }
+        var avid = getAVID(activeTab.url+"END","av","END");
+     
+        if (avid == null){
+            toolbarItem.disabled = true;
+        } else {
+            toolbarItem.disabled = false;
+        }
+    } else {
+     toolbarItem.disabled = true;
+    }
+}
+
+function commandHandler(event)
+{
+    if (event.command === "HighQuality") {
+        if (activeTab){
+            var avid = getAVID(activeTab.url+"END","av","END");
+            if (avid != null){
+                var newTab = safari.application.activeBrowserWindow.openTab();
+                newTab.url = "http://www.ra1ndrops.com/getbilidouga.php?request=downurl&quality=3&type=json&avid="+getCID(avid);
+            }
+        }
+    }else if (event.command === "NormalQuality"){
+        if (activeTab){
+            var avid = getAVID(activeTab.url+"END","av","END");
+            if (avid != null){
+                var newTab = safari.application.activeBrowserWindow.openTab();
+                newTab.url = "http://www.ra1ndrops.com/getbilidouga.php?request=downurl&type=json&quality=2&avid="+getCID(avid);
+            }
+        }
+    }else if (event.command === "BlackTech"){
+        if (activeTab){
+            var avid = getAVID(activeTab.url+"END","av","END");
+            if (avid != null){
+                var newTab = safari.application.activeBrowserWindow.openTab();
+                newTab.url = "https://secure.bilibili.tv/secure,cid="+getCID(avid);
+            }
+        }
+    }
+}
+
+function menuHandler(event)
+{
+
+}
+</script>
